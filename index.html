@@ -15,6 +15,10 @@
             --accent-gray: #8e8e93;
             --border-color: #2c2c2e;
             --discord-bg: #313338;
+            --discord-text: #dbdee1;
+            --discord-timestamp: #949ba4;
+            --discord-username: #ffffff;
+            --discord-note: #b5bac1;
         }
 
         body {
@@ -52,14 +56,6 @@
             border: 1px solid var(--border-color);
             margin-bottom: 20px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-        }
-
-        .question {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            opacity: 0.8;
         }
 
         .no-text {
@@ -107,46 +103,55 @@
             letter-spacing: 1px;
         }
 
-        /* Profil Fotoğrafsız Discord Yorum Kartı */
-        .comment-card {
+        .discord-chat-container {
             background-color: var(--discord-bg);
             border-radius: 12px;
-            padding: 16px 20px;
+            padding: 20px;
             margin-top: 30px;
             text-align: left;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            max-width: 450px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .message-content {
-            display: flex;
-            flex-direction: column;
+        .discord-message {
+            margin-bottom: 16px;
         }
+
+        .discord-message:last-child { margin-bottom: 0; }
 
         .user-info {
             display: flex;
-            align-items: center;
+            align-items: baseline;
             gap: 8px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
+            flex-wrap: wrap;
         }
 
         .username {
-            color: #ffffff;
+            color: var(--discord-username);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1rem;
+        }
+
+        .user-note {
+            color: var(--discord-note);
+            font-size: 0.85rem;
+            font-weight: 400;
+            opacity: 0.7;
         }
 
         .timestamp {
-            color: #949ba4;
+            color: var(--discord-timestamp);
             font-size: 0.75rem;
+            font-weight: 500;
         }
 
-        .text {
-            color: #dbdee1;
+        .message-text {
+            color: var(--discord-text);
             font-size: 1rem;
-            line-height: 1.4;
+            line-height: 1.375rem;
         }
 
         .date-info {
@@ -162,60 +167,53 @@
         <h1>AMONG US AGALAR</h1>
         
         <div class="status-card">
-            <div class="question">İTİRAF KANALI GERİ GELDİ Mİ?</div>
-            <div class="no-text">HAYIR</div>
+            <div style="font-weight: 500; opacity: 0.8; margin-bottom: 15px;">İTİRAF KANALI GERİ GELDİ Mİ?</div>
+            <h2 class="no-text">HAYIR</h2>
         </div>
 
         <div class="timer-grid">
-            <div class="timer-item">
-                <span id="days" class="timer-value">-</span>
-                <span class="timer-label">Gün</span>
-            </div>
-            <div class="timer-item">
-                <span id="hours" class="timer-value">-</span>
-                <span class="timer-label">Saat</span>
-            </div>
-            <div class="timer-item">
-                <span id="minutes" class="timer-value">-</span>
-                <span class="timer-label">Dakika</span>
-            </div>
-            <div class="timer-item">
-                <span id="seconds" class="timer-value">-</span>
-                <span class="timer-label">Saniye</span>
-            </div>
+            <div class="timer-item"><span id="days" class="timer-value">-</span><span class="timer-label">Gün</span></div>
+            <div class="timer-item"><span id="hours" class="timer-value">-</span><span class="timer-label">Saat</span></div>
+            <div class="timer-item"><span id="minutes" class="timer-value">-</span><span class="timer-label">Dakika</span></div>
+            <div class="timer-item"><span id="seconds" class="timer-value">-</span><span class="timer-label">Saniye</span></div>
         </div>
 
-        <div class="comment-card">
-            <div class="message-content">
+        <div class="discord-chat-container">
+            <div class="discord-message">
                 <div class="user-info">
                     <span class="username">sulfies</span>
+                    <span class="user-note">(itiraf açıldı mı? daily)</span>
                     <span class="timestamp">Bugün 23:34</span>
                 </div>
-                <div class="text">kaybımız büyük</div>
+                <div class="message-text">kaybımız büyük</div>
+            </div>
+
+            <div class="discord-message">
+                <div class="user-info">
+                    <span class="username">sudmaifa</span>
+                    <span class="user-note">(müzik canavarı)</span>
+                    <span class="timestamp">Bugün 00:29</span>
+                </div>
+                <div class="message-text">kapanış anına canlı canlı şahit oldum çok kötüydü</div>
             </div>
         </div>
 
         <div class="date-info">
-            Kanal şu tarihten beri kapalıdır: <strong>08.04.2026 12:00</strong>
+            Kanal şu tarihten beri kapalıdır: <strong>08.04.2026 02:37</strong>
         </div>
     </div>
 
     <script>
-        const startDate = new Date("2026-04-08T12:00:00").getTime();
+        const startDate = new Date("2026-04-08T02:37:00").getTime();
 
         function updateTimer() {
             const now = new Date().getTime();
             const distance = now - startDate;
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = Math.max(0, days);
-            document.getElementById("hours").innerText = Math.max(0, hours);
-            document.getElementById("minutes").innerText = Math.max(0, minutes);
-            document.getElementById("seconds").innerText = Math.max(0, seconds);
+            document.getElementById("days").innerText = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+            document.getElementById("hours").innerText = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+            document.getElementById("minutes").innerText = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+            document.getElementById("seconds").innerText = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
         }
 
         setInterval(updateTimer, 1000);
